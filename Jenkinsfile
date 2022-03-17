@@ -33,5 +33,12 @@ pipeline {
                version: '3.0.0'
            }
        }
+        stage('Deploy to Tomcat'){
+                    steps {
+                         sshagent(['deploy-user']) {
+                         sh "scp -o StrictHostKeyChecking=no target/simple-app-3.0.0.war ubuntu@15.207.108.110:/opt/apache-tomcat-8.5.76/webapps"
+                    }
+               }
+          }
     }
 }
